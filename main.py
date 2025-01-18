@@ -45,7 +45,7 @@ BROWSER_CONFIG = BrowserConfig(
 	)
 )
 
-class DocScraper:
+class DocsiteToMD:
 	def __init__(self):
 		self.browser = None
 		self.client = AsyncOpenAI()
@@ -53,7 +53,7 @@ class DocScraper:
 		self.visited_urls = set()
 		self.collected_docs = []
 		self.semaphore = Semaphore(MAX_CONCURRENT)
-		logger.info("DocScraper initialized")
+		logger.info("DocsiteToMD initialized")
 
 	async def initialize(self):
 		"""Initialize directories asynchronously"""
@@ -321,8 +321,8 @@ domain: {domain}
 
 async def main():
 	try:
-		logger.info("Starting DocScraper")
-		scraper = DocScraper()
+		logger.info("Starting DocsiteToMD")
+		scraper = DocsiteToMD()
 		await scraper.initialize()
 		
 		start_url = "https://docs.browser-use.com/introduction"
@@ -330,7 +330,7 @@ async def main():
 		
 		await scraper.process_url(start_url, allowed_domain)
 		await scraper.generate_combined_docs()
-		logger.success("Documentation scraping completed successfully")
+		logger.success("Documentation conversion completed successfully")
 	except Exception as e:
 		logger.error(f"Fatal error: {str(e)}", exc_info=True)
 		raise

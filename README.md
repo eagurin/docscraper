@@ -1,34 +1,34 @@
-# DocScraper
+# DocsiteToMD
 
 > 🌍 Language: [English](README.md) | [Русский](docs/README_ru.md) | [中文](docs/README_zh.md)
 
-An intelligent documentation processing system that leverages asynchronous operations and AI to transform web-based documentation into structured, searchable knowledge bases.
+A specialized tool for converting documentation websites into structured markdown files, optimized for training RAG (Retrieval-Augmented Generation) systems. It crawls documentation sites, preserves their structure, and generates AI-enhanced markdown content.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 🎯 Core Functionality
 
-DocScraper systematically processes documentation through several key stages:
+DocsiteToMD transforms documentation websites through several key stages:
 
-1. **Web Crawling**: 
+1. **Documentation Site Crawling**: 
    - Asynchronous multi-threaded crawling
-   - Smart rate limiting and respect for robots.txt
-   - Domain-specific content extraction
+   - Smart rate limiting and robots.txt compliance
+   - Documentation-specific content extraction
 
 2. **Content Processing**:
-   - Markdown conversion and standardization
-   - Hierarchical document structure maintenance
+   - HTML to Markdown conversion
+   - Documentation hierarchy preservation
    - Metadata extraction and enrichment
 
-3. **AI Integration**:
-   - OpenAI-powered content summarization
-   - Semantic structure analysis
-   - Context-aware document organization
+3. **RAG Optimization**:
+   - AI-powered content structuring
+   - Semantic analysis for better retrieval
+   - Context-aware organization
 
 ## 🏗 Architecture
 
 ```plaintext
-DocScraper/
+DocsiteToMD/
 ├── Crawling Engine
 │   ├── Async Fetcher
 │   └── Content Extractor
@@ -37,32 +37,32 @@ DocScraper/
 │   ├── Structure Analyzer
 │   └── AI Enhancer
 └── Output Generator
-	├── Site-Specific Docs
-	└── Combined Knowledge Base
+    ├── Site-Specific Docs
+    └── Combined Knowledge Base
 ```
 
 ## 💾 Data Processing Flow
 
 1. **Input Phase**
-   - URL collection and validation
+   - Documentation site URL validation
    - Domain categorization
    - Rate limit configuration
 
 2. **Processing Phase**
-   - Concurrent document fetching
-   - Content extraction and cleaning
+   - Concurrent page fetching
+   - Documentation extraction
    - AI-assisted enhancement
 
 3. **Output Phase**
-   - Structured markdown generation
-   - Cross-reference creation
+   - RAG-optimized markdown generation
+   - Cross-reference preservation
    - Index compilation
 
 ## 🚀 Quick Start
 
 ```bash
 # Clone repository
-git clone https://github.com/eagurin/docscraper.git
+git clone https://github.com/eagurin/docsitetomd.git
 
 # Setup environment
 cp .env.example .env
@@ -89,30 +89,30 @@ python main.py
 ### Output Structure
 ```plaintext
 docs_output/
-├── sites/              # Domain-specific content
+├── sites/              # Documentation site content
 │   └── {domain}/      # Per-site documentation
 └── combined/          # Unified knowledge base
-	├── index.md       # Global index
-	└── {domain}.md    # Domain summaries
+    ├── index.md       # Global index
+    └── {domain}.md    # Domain summaries
 ```
 
-## 🔍 For AI/ML Integration
+## 🔍 RAG Integration
 
-Key aspects for RAG systems:
+Key features for RAG systems:
 
 1. **Document Structure**
    - Consistent markdown formatting
-   - Clear hierarchical organization
-   - Metadata-rich content
+   - Documentation hierarchy preservation
+   - Rich metadata inclusion
 
 2. **Content Processing**
    - Semantic chunking
    - Context preservation
    - Cross-reference maintenance
 
-3. **Knowledge Graph**
+3. **Knowledge Organization**
    - Topic relationships
-   - Document dependencies
+   - Documentation dependencies
    - Semantic connections
 
 ## 📚 Resources
