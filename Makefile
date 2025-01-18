@@ -16,7 +16,6 @@ help:
 	@echo "    MAX_CONCURRENT=<n> Maximum concurrent requests (default: 3)"
 	@echo "    WAIT_TIME=<sec>    Wait time for page load (default: 3.0)"
 	@echo "    MODEL=<name>       OpenAI model name (default: gpt-4)"
-	@echo "  make docker-run    - Run with Docker (same parameters as above)"
 	@echo "  make lint          - Run all linters"
 	@echo "  make test          - Run tests"
 	@echo "  make clean         - Clean up generated files"
@@ -26,14 +25,6 @@ install:
 
 run:
 	$(PYTHON) main.py \
-		--url $(URL) \
-		--output-dir $(OUTPUT_DIR) \
-		--max-concurrent $(MAX_CONCURRENT) \
-		--wait-time $(WAIT_TIME) \
-		$(if $(MODEL),--model $(MODEL))
-
-docker-run:
-	docker-compose run --rm docscraper python main.py \
 		--url $(URL) \
 		--output-dir $(OUTPUT_DIR) \
 		--max-concurrent $(MAX_CONCURRENT) \
@@ -55,3 +46,4 @@ clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 	find . -type d -name ".pytest_cache" -exec rm -rf {} +
 	find . -type d -name ".mypy_cache" -exec rm -rf {} +
+

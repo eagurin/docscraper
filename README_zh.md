@@ -33,23 +33,15 @@ DocScraper 自动将文档网站转换为清晰、结构化的markdown文件，�
 
 - 🐍 Python 3.8+
 - 🔑 OpenAI API密钥
-- 🐳 Docker (可选)
 
 ### 📦 安装
 
-1. **克隆并设置**:
 ```bash
-git clone https://github.com/eagurin/docscraper.git
-cd docscraper
+# 安装依赖
+make install
 ```
 
-2. **使用Poetry安装**（推荐）:
-```bash
-poetry install
-poetry shell
-```
-
-3. **配置**:
+**配置**:
 ```bash
 cp .env.example .env
 # 编辑 .env 设置:
@@ -59,12 +51,18 @@ cp .env.example .env
 
 ### 🎮 使用方法
 
-**使用Poetry和Docker**（推荐）:
 ```bash
-poetry run python main.py  # 本地运行
-# 或
-docker-compose up --build  # Docker运行
+# 运行爬虫
+make run URL=https://docs.example.com
 ```
+
+参数:
+- URL: 要爬取的URL（必需）
+- OUTPUT_DIR: 输出目录（默认：docs_output）
+- MAX_CONCURRENT: 最大并发请求数（默认：3）
+- WAIT_TIME: 页面加载等待时间（默认：3.0）
+- MODEL: OpenAI模型（默认：gpt-4）
+
 
 ## 🛠 开发
 
@@ -95,7 +93,7 @@ docscraper/
 │   ├── sites/           # 按站点的内容
 │   └── combined/        # 统一知识库
 ├── 📝 main.py           # 核心应用
-├── 🐳 Dockerfile        # 容器配置
+├── 📄 Dockerfile        # 构建配置
 ├── 📋 requirements.txt  # 依赖项
 └── ⚙️ .env             # 配置文件
 ```

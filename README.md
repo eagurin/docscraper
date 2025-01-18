@@ -17,7 +17,8 @@ DocScraper automatically converts documentation websites into clean, structured 
 - 🧠 **AI Enhancement**: OpenAI-powered content structuring
 - 📊 **RAG Optimization**: Perfect for training data preparation
 - 🔍 **Metadata Rich**: Preserves context and relationships
-- 🐳 **Docker Ready**: Easy deployment and scaling
+- 🐳 **Docker-ready**: Easy deployment and scaling
+
 
 ## 💫 Why DocScraper?
 
@@ -33,23 +34,15 @@ DocScraper automatically converts documentation websites into clean, structured 
 
 - 🐍 Python 3.8+
 - 🔑 OpenAI API key
-- 🐳 Docker (optional)
 
 ### 📦 Installation
 
-1. **Clone and Setup**:
-```bash
-git clone https://github.com/eagurin/docscraper.git
-cd docscraper
-```
-
-2. **Install with Poetry** (recommended):
+1. **Install with Poetry**:
 ```bash
 poetry install
-poetry shell
 ```
 
-3. **Configure**:
+2. **Configure**:
 ```bash
 cp .env.example .env
 # Edit .env with your settings:
@@ -59,7 +52,6 @@ cp .env.example .env
 
 ### 🎮 Usage
 
-**With Make** (recommended):
 ```bash
 # Basic usage
 make run URL=https://your-docs.com
@@ -71,11 +63,6 @@ make run \
 	MAX_CONCURRENT=5 \
 	WAIT_TIME=5.0 \
 	MODEL=gpt-4
-```
-
-**With Docker**:
-```bash
-make docker-run URL=https://your-docs.com
 ```
 
 ### ⚙️ Command Line Parameters
@@ -117,9 +104,8 @@ docscraper/
 │   ├── sites/           # Per-site content
 │   └── combined/        # Unified knowledge base
 ├── 📝 main.py           # Core application
-├── 🐳 Dockerfile        # Container config
-├── 📋 requirements.txt  # Dependencies
-└── ⚙️ .env             # Configuration
+├── 📄 pyproject.toml    # Project configuration
+└── ⚙️ .env             # Environment configuration
 ```
 
 ## 🎨 Output Format
@@ -149,7 +135,6 @@ DocScraper generates two types of RAG-optimized content:
 | MAX_CONCURRENT | Parallel operations | 3 |
 
 ### 🔧 Resource Settings
-- 🖥️ Memory Limit: 2GB
 - 📊 Concurrent Tasks: 3
 - 📝 Log Rotation: 500MB
 - 🕒 Log Retention: 10 days
