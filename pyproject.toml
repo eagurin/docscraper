@@ -15,6 +15,7 @@ beautifulsoup4 = "^4.12.2"
 loguru = "^0.7.2"
 browser-use = "^0.1.0"
 argparse = "^1.4.0"
+tenacity = "^8.2.3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.3"

@@ -3,7 +3,9 @@ import argparse
 import asyncio
 import os
 import sys
+import functools
 from typing import List, Dict, Set, Coroutine
+from tenacity import retry, stop_after_attempt, wait_exponential
 from urllib.parse import urlparse
 from pathlib import Path
 from datetime import datetime
@@ -39,11 +41,15 @@ logger.add(
 MODEL_NAME = os.getenv('MODEL_NAME', 'gpt-4')
 MAX_CONCURRENT = 3  # Limit concurrent operations
 
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
+async def retry_request(func, *args, **kwargs):
+	return await func(*args, **kwargs)
+
 BROWSER_CONFIG = BrowserConfig(
 	headless=True,
 	disable_security=True,
 	new_context_config=BrowserContextConfig(
-		wait_for_network_idle_page_load_time=3.0
+		wait_for_network_idle_page_load_time=10.0  # Increased from 3.0
 	)
 )
 
@@ -101,10 +107,10 @@ class DocsiteToMD:
 
 	async def safe_navigate(self, url: str) -> bool:
 		try:
-			await self.context.create_new_tab()
-			await asyncio.sleep(1)
-			await self.context.navigate_to(url)
-			await asyncio.sleep(2)
+			await retry_request(self.context.create_new_tab)
+			await asyncio.sleep(2)  # Increased from 1
+			await retry_request(self.context.navigate_to, url)
+			await asyncio.sleep(5)  # Increased from 2
 			return True
 		except Exception as e:
 			logger.error(f"Navigation error for {url}: {str(e)}", exc_info=True)
@@ -118,46 +124,50 @@ class DocsiteToMD:
 			logger.info(f"Processing URL: {url}")
 			self.visited_urls.add(url)
 			
-			try:
-				await self.context.create_new_tab()
-				await self.context.navigate_to(url)
-				await asyncio.sleep(3)
-
-				content = await self.context.get_page_html()
-				if not content:
-					logger.warning(f"No content received for {url}")
-					return
-
-				result = await self._process_content(content, url, allowed_domain, path_parts)
-				if result:
-					doc_data, main_content = result
-					
-					logger.info(f"Generating markdown for: {doc_data['title']}")
-					markdown_content = await self.generate_markdown(doc_data)
-					await self.save_markdown(doc_data['title'], markdown_content, doc_data['path_parts'], allowed_domain)
-					self.collected_docs.append(doc_data)
-
-					page = await self.context.get_current_page()
-					links = await page.evaluate(f"""() => {{
-						return Array.from(document.querySelectorAll('a[href]'))
-							.map(a => a.href)
-							.filter(href => href.includes('{allowed_domain}') && !href.includes('#'));
-					}}""")
-					
-					new_links = [link for link in links if link not in self.visited_urls][:3]
-					if new_links:
-						logger.debug(f"Found {len(new_links)} new links to process")
-						await asyncio.gather(
-							*(self.process_url(link, allowed_domain, path_parts) for link in new_links)
-						)
-
-			except Exception as e:
-				logger.error(f"Error processing {url}: {str(e)}")
-			finally:
+			for attempt in range(3):  # Try up to 3 times
 				try:
-					await self.context.close_current_tab()
-				except:
-					pass
+					success = await self.safe_navigate(url)
+					if not success:
+						raise Exception("Navigation failed")
+
+					content = await retry_request(self.context.get_page_html)
+					if not content:
+						raise Exception("No content received")
+
+					result = await self._process_content(content, url, allowed_domain, path_parts)
+					if result:
+						doc_data, main_content = result
+						
+						logger.info(f"Generating markdown for: {doc_data['title']}")
+						markdown_content = await self.generate_markdown(doc_data)
+						await self.save_markdown(doc_data['title'], markdown_content, doc_data['path_parts'], allowed_domain)
+						self.collected_docs.append(doc_data)
+
+						page = await self.context.get_current_page()
+						links = await page.evaluate(f"""() => {{
+							return Array.from(document.querySelectorAll('a[href]'))
+								.map(a => a.href)
+								.filter(href => href.includes('{allowed_domain}') && !href.includes('#'));
+						}}""")
+						
+						new_links = [link for link in links if link not in self.visited_urls][:3]
+						if new_links:
+							logger.debug(f"Found {len(new_links)} new links to process")
+							await asyncio.gather(
+								*(self.process_url(link, allowed_domain, path_parts) for link in new_links)
+							)
+					break  # Success, exit retry loop
+
+				except Exception as e:
+					logger.error(f"Error processing {url} (attempt {attempt + 1}/3): {str(e)}")
+					if attempt < 2:  # If not the last attempt
+						await asyncio.sleep(5 * (attempt + 1))  # Exponential backoff
+						continue
+				finally:
+					try:
+						await self.context.close_current_tab()
+					except:
+						pass
 
 
 
