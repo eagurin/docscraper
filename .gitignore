@@ -24,6 +24,12 @@ wheels/
 # Virtual Environment
 venv/
 ENV/
+.venv/
+
+# Poetry
+poetry.lock
+dist/
+*.pyc
 
 # IDE
 .idea/
