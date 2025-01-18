@@ -1,13 +1,12 @@
 [tool.poetry]
-name = "docscraper"
+name = "parse-agent"
 version = "0.1.0"
 description = "Documentation scraper and parser that transforms web docs into RAG-optimized markdown files"
 authors = ["Eugene Agurin <eugene@agurin.tech>"]
 readme = "README.md"
-packages = [{include = "docscraper"}]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.11,<3.13"
 aiofiles = "^23.2.1"
 asyncio = "^3.4.3"
 python-dotenv = "^1.0.0"
@@ -15,6 +14,7 @@ openai = "^1.6.1"
 beautifulsoup4 = "^4.12.2"
 loguru = "^0.7.2"
 browser-use = "^0.1.0"
+argparse = "*"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.3"
@@ -30,14 +30,14 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 88
-target-version = ["py38"]
+target-version = ["py311", "py312"]
 
 [tool.isort]
 profile = "black"
 multi_line_output = 3
 
 [tool.mypy]
-python_version = "3.8"
+python_version = "3.12"
 strict = true
 ignore_missing_imports = true
 
