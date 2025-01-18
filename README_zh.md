@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-🌍 **语言**: [English](README_en.md) | [Русский](README_ru.md) | [中文](README_zh.md)
+🌍 **语言**: [English](README.md) | [Русский](README_ru.md) | [中文](README_zh.md)
 
 ## 🎯 这是什么
 
@@ -131,7 +131,7 @@ DocScraper生成两种RAG优化的内容：
 
 ## 🤝 贡献
 
-欢迎贡献！查看我们的[贡献指南](CONTRIBUTING.md)了解：
+欢迎贡献！查看我们的[贡献指南](docs/CONTRIBUTING.md)了解：
 - 📝 代码风格指南
 - 🔍 测试要求
 - 🚀 PR流程

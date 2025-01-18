@@ -14,7 +14,7 @@ We welcome contributions to DocScraper! This document provides guidelines and be
 
 ```bash
 # Clone your fork
-git clone https://github.com/eagurin/docscraper.git
+git clone https://github.com/your-username/docscraper.git
 cd docscraper
 
 # Set up development environment
