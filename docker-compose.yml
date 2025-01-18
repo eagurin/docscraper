@@ -1,15 +1,15 @@
-version: '3.8'
-
 services:
 	docscraper:
 		build: .
 		container_name: docscraper
 		volumes:
-			- ./docs_output:/app/docs_output
+			- ${OUTPUT_DIR:-./docs_output}:/app/docs_output
 			- ./logs:/app/logs
 		environment:
 			- OPENAI_API_KEY=${OPENAI_API_KEY}
-			- MODEL_NAME=${MODEL_NAME:-gpt-4}
+			- MODEL_NAME=${MODEL:-gpt-4}
+			- MAX_CONCURRENT=${MAX_CONCURRENT:-3}
+			- WAIT_TIME=${WAIT_TIME:-3.0}
 		mem_limit: 2g
 		healthcheck:
 			test: ["CMD", "poetry", "run", "python", "-c", "import sys; sys.exit(0)"]

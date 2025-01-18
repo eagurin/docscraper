@@ -59,12 +59,34 @@ cp .env.example .env
 
 ### 🎮 Usage
 
-**With Poetry and Docker** (recommended):
+**With Make** (recommended):
 ```bash
-poetry run python main.py  # Local run
-# or
-docker-compose up --build  # Docker run
+# Basic usage
+make run URL=https://your-docs.com
+
+# Advanced usage with all parameters
+make run \
+	URL=https://your-docs.com \
+	OUTPUT_DIR=custom_docs \
+	MAX_CONCURRENT=5 \
+	WAIT_TIME=5.0 \
+	MODEL=gpt-4
 ```
+
+**With Docker**:
+```bash
+make docker-run URL=https://your-docs.com
+```
+
+### ⚙️ Command Line Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| URL | Starting URL to scrape | Required |
+| OUTPUT_DIR | Output directory | docs_output |
+| MAX_CONCURRENT | Maximum concurrent requests | 3 |
+| WAIT_TIME | Wait time for page load (seconds) | 3.0 |
+| MODEL | OpenAI model name | gpt-4 |
 
 ## 🛠 Development
 

@@ -1,8 +1,10 @@
 import aiofiles
+import argparse
 import asyncio
 import os
 import sys
 from typing import List, Dict, Set, Coroutine
+from urllib.parse import urlparse
 from pathlib import Path
 from datetime import datetime
 from dotenv import load_dotenv
@@ -46,10 +48,10 @@ BROWSER_CONFIG = BrowserConfig(
 )
 
 class DocsiteToMD:
-	def __init__(self):
+	def __init__(self, base_dir='docs_output'):
 		self.browser = None
 		self.client = AsyncOpenAI()
-		self.base_dir = Path('docs_output')
+		self.base_dir = Path(base_dir)
 		self.visited_urls = set()
 		self.collected_docs = []
 		self.semaphore = Semaphore(MAX_CONCURRENT)
@@ -320,15 +322,28 @@ domain: {domain}
 
 
 async def main():
+	parser = argparse.ArgumentParser(description='Documentation site scraper')
+	parser.add_argument('--url', required=True, help='Starting URL to scrape')
+	parser.add_argument('--output-dir', default='docs_output', help='Output directory')
+	parser.add_argument('--max-concurrent', type=int, default=3, help='Maximum concurrent requests')
+	parser.add_argument('--wait-time', type=float, default=3.0, help='Wait time for page load')
+	parser.add_argument('--model', help='OpenAI model name (default: from env)')
+	args = parser.parse_args()
+
+	global MODEL_NAME, MAX_CONCURRENT
+	if args.model:
+		MODEL_NAME = args.model
+	MAX_CONCURRENT = args.max_concurrent
+
+	BROWSER_CONFIG.new_context_config.wait_for_network_idle_page_load_time = args.wait_time
+	
 	try:
 		logger.info("Starting DocsiteToMD")
-		scraper = DocsiteToMD()
+		scraper = DocsiteToMD(base_dir=args.output_dir)
 		await scraper.initialize()
 		
-		start_url = "https://docs.browser-use.com/introduction"
-		allowed_domain = "docs.browser-use.com"
-		
-		await scraper.process_url(start_url, allowed_domain)
+		domain = urlparse(args.url).netloc
+		await scraper.process_url(args.url, domain)
 		await scraper.generate_combined_docs()
 		logger.success("Documentation conversion completed successfully")
 	except Exception as e:
