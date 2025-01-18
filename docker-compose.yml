@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-	docsitetomd:
+	docscraper:
 		build: .
-		container_name: docsitetomd
+		container_name: docscraper
 		volumes:
 			- ./docs_output:/app/docs_output
 			- ./logs:/app/logs
@@ -12,7 +12,7 @@ services:
 			- MODEL_NAME=${MODEL_NAME:-gpt-4}
 		mem_limit: 2g
 		healthcheck:
-			test: ["CMD", "python", "-c", "import sys; sys.exit(0)"]
+			test: ["CMD", "poetry", "run", "python", "-c", "import sys; sys.exit(0)"]
 			interval: 30s
 			timeout: 10s
 			retries: 3
