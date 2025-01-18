@@ -73,7 +73,7 @@ make run \
 | OUTPUT_DIR | Output directory | docs_output |
 | MAX_CONCURRENT | Maximum concurrent requests | 3 |
 | WAIT_TIME | Wait time for page load (seconds) | 10.0 |
-| MODEL | OpenAI model name | gpt-4 |
+| MODEL_NAME | OpenAI model name | gpt-4 |
 
 ## 🛠 Development
 
