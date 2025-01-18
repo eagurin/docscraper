@@ -1,137 +1,142 @@
-# DocScraper
+# 🚀 DocScraper
 
-An asynchronous documentation scraper and parser that transforms web documentation into structured markdown files, optimized for RAG (Retrieval-Augmented Generation) systems and AI training datasets.
+> Transform documentation websites into RAG-optimized markdown collections for AI training
 
-## Features
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-- Asynchronous web crawling with concurrent processing
-- Intelligent HTML to Markdown conversion
-- RAG-optimized documentation structure
-- AI-enhanced content organization
-- Comprehensive logging system
-- Docker support with resource management
+🌍 **Languages**: [English](README.md) | [Русский](docs/README_ru.md) | [中文](docs/README_zh.md)
 
-## Key Benefits
+## 🎯 What it Does
 
-- **Clean Markdown Output**: Generates well-structured markdown files
-- **RAG-Ready Format**: Optimized for training AI models
-- **Hierarchy Preservation**: Maintains original documentation structure
-- **Rich Metadata**: Includes context and relationships
-- **Cross-References**: Preserves internal links and references
+DocScraper automatically converts documentation websites into clean, structured markdown files optimized for RAG (Retrieval-Augmented Generation) systems and AI training datasets. Perfect for creating high-quality training data for your AI models.
 
-## Requirements
+### ✨ Key Features
 
-- Python 3.8+
-- OpenAI API key
-- Docker (optional)
+- 🔄 **Smart Crawling**: Asynchronous, multi-threaded website processing
+- 📝 **Intelligent Conversion**: HTML → Clean Markdown transformation
+- 🧠 **AI Enhancement**: OpenAI-powered content structuring
+- 📊 **RAG Optimization**: Perfect for training data preparation
+- 🔍 **Metadata Rich**: Preserves context and relationships
+- 🐳 **Docker Ready**: Easy deployment and scaling
 
-## Installation
+## 💫 Why DocScraper?
 
-1. Clone the repository:
+- 📚 **Clean Documentation**: Perfectly formatted markdown files
+- 🤖 **AI-Ready Format**: Optimized for RAG systems
+- 🌳 **Structure Preservation**: Maintains original hierarchy
+- 🔗 **Smart References**: Keeps internal links and context
+- 🎨 **Rich Metadata**: Enhanced with AI-generated insights
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- 🐍 Python 3.8+
+- 🔑 OpenAI API key
+- 🐳 Docker (optional)
+
+### 📦 Installation
+
+1. **Clone and Setup**:
 ```bash
-git clone https://github.com/yourusername/docscraper.git
+git clone https://github.com/eagurin/docscraper.git
 cd docscraper
 ```
 
-2. Create and activate virtual environment:
+2. **Create Environment**:
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install dependencies:
-```bash
+source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. Create .env file:
+3. **Configure**:
 ```bash
-MODEL_NAME=gpt-4
-OPENAI_API_KEY=your_api_key_here
+cp .env.example .env
+# Edit .env with your settings:
+# MODEL_NAME=gpt-4
+# OPENAI_API_KEY=your_key_here
 ```
 
-## Usage
+### 🎮 Usage
 
-### Running with Python
-
-```bash
-python main.py
-```
-
-### Running with Docker Compose
-
+**With Docker** (recommended):
 ```bash
 docker-compose up --build
 ```
 
-## Project Structure
-
+**Without Docker**:
+```bash
+python main.py
 ```
+
+## 📁 Project Structure
+
+```plaintext
 docscraper/
-├── docs_output/          # Output directory for documentation
-│   ├── sites/           # Domain-specific documentation
-│   └── combined/        # Combined documentation files
-├── logs/                # Log files directory
-├── main.py              # Main application file
-├── requirements.txt     # Python dependencies
-├── Dockerfile          # Docker configuration
-├── docker-compose.yml  # Docker Compose configuration
-└── .env                # Environment variables
+├── 📂 docs_output/        # Generated documentation
+│   ├── sites/           # Per-site content
+│   └── combined/        # Unified knowledge base
+├── 📝 main.py           # Core application
+├── 🐳 Dockerfile        # Container config
+├── 📋 requirements.txt  # Dependencies
+└── ⚙️ .env             # Configuration
 ```
 
-## Output Structure
+## 🎨 Output Format
 
-The parser generates RAG-optimized markdown in two formats:
+DocScraper generates two types of RAG-optimized content:
 
-1. Domain-specific documentation (`docs_output/sites/{domain}/`):
-   - Clean markdown files for each page
-   - Preserved URL structure in markdown
-   - Metadata-rich content
+### 1. 📑 Site-Specific Documentation
+- Clean markdown per page
+- Original URL structure
+- Rich metadata headers
+- AI-enhanced content
 
-2. Combined documentation (`docs_output/combined/`):
-   - Domain-specific markdown compilations
-   - Master markdown index
-   - Cross-referenced documentation
+### 2. 📚 Combined Knowledge Base
+- Cross-referenced documentation
+- Global search index
+- Topic relationships
+- Semantic connections
 
-## Logging
+## ⚙️ Configuration
 
-The application uses loguru for comprehensive logging:
+### Environment Variables
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| MODEL_NAME | OpenAI model | gpt-4 |
+| OPENAI_API_KEY | API authentication | Required |
+| LOG_LEVEL | Logging detail | INFO |
+| MAX_CONCURRENT | Parallel operations | 3 |
 
-- Console output (INFO level):
-  - Colored formatting
-  - Real-time processing updates
-  - Important operational information
+### 🔧 Resource Settings
+- 🖥️ Memory Limit: 2GB
+- 📊 Concurrent Tasks: 3
+- 📝 Log Rotation: 500MB
+- 🕒 Log Retention: 10 days
 
-- File logging (DEBUG level):
-  - Detailed debug information
-  - Full error tracebacks
-  - Diagnostic information
-  - Log rotation: 500MB per file
-  - Log retention: 10 days
+## 📈 RAG Integration
 
-Log files are stored in `logs/docparser_{time}.log`
+### Document Processing
+- 📝 Consistent markdown formatting
+- 🌳 Hierarchical structure
+- 🏷️ Rich metadata inclusion
+- 🔍 Semantic chunking
+- 🔗 Cross-references
 
-## Configuration
+### Knowledge Organization
+- 📚 Topic relationships
+- 🔄 Document dependencies
+- 🧩 Semantic connections
 
-Key configuration options:
+## 🤝 Contributing
 
-- `MAX_CONCURRENT`: Maximum concurrent operations (default: 3)
-- `BROWSER_CONFIG`: Browser configuration settings
-- Docker resource limits:
-  - Memory limit: 2GB
-  - Memory reservation: 1GB
-- Log levels:
-  - Console: INFO
-  - File: DEBUG
+We welcome contributions! See our [Contributing Guide](docs/CONTRIBUTING.md) for:
+- 📝 Code style guidelines
+- 🔍 Testing requirements
+- 🚀 PR process
+- 📦 Development setup
 
-## License
+## 📄 License
 
-MIT License
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+MIT License - See [LICENSE](LICENSE) for details

@@ -1,71 +1,142 @@
-# DocScraper
+# 🚀 DocScraper
 
-一个异步文档抓取和解析器，可以爬取网站、提取内容并生成结构化的markdown文档。
+> 将文档网站转换为针对AI训练优化的markdown文件集合
 
-[English](README_en.md) | [Русский](README_ru.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## 功能特点
+🌍 **语言**: [English](README_en.md) | [Русский](README_ru.md) | [中文](README_zh.md)
 
-- 异步网页爬取与并发处理
-- 按域名组织文档
-- 使用OpenAI辅助生成Markdown
-- 结构化输出与合并文档
-- 多级别的完整日志系统
-- Docker支持与资源管理
+## 🎯 这是什么
 
-## 快速开始
+DocScraper 自动将文档网站转换为清晰、结构化的markdown文件，专为RAG（检索增强生成）系统和AI训练数据集优化。是创建高质量AI模型训练数据的理想工具。
 
-1. 克隆仓库：
+### ✨ 核心功能
+
+- 🔄 **智能爬虫**: 异步、多线程网站处理
+- 📝 **智能转换**: HTML → 清晰Markdown
+- 🧠 **AI增强**: OpenAI驱动的内容结构化
+- 📊 **RAG优化**: 完美适配训练数据准备
+- 🔍 **丰富元数据**: 保留上下文和关系
+- 🐳 **Docker就绪**: 轻松部署和扩展
+
+## 💫 为什么选择DocScraper？
+
+- 📚 **清晰文档**: 完美格式化的markdown文件
+- 🤖 **AI就绪格式**: 针对RAG系统优化
+- 🌳 **结构保留**: 维持原始层次结构
+- 🔗 **智能引用**: 保持内部链接和上下文
+- 🎨 **丰富元数据**: AI生成的增强洞察
+
+## 🚀 快速开始
+
+### 前置要求
+
+- 🐍 Python 3.8+
+- 🔑 OpenAI API密钥
+- 🐳 Docker (可选)
+
+### 📦 安装
+
+1. **克隆并设置**:
 ```bash
-git clone https://github.com/yourusername/docscraper.git
+git clone https://github.com/eagurin/docscraper.git
 cd docscraper
 ```
 
-2. 环境设置：
+2. **创建环境**:
 ```bash
-cp .env.example .env  # 编辑配置
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-3. 使用Docker运行：
+3. **配置**:
+```bash
+cp .env.example .env
+# 编辑 .env 设置:
+# MODEL_NAME=gpt-4
+# OPENAI_API_KEY=你的密钥
+```
+
+### 🎮 使用方法
+
+**使用Docker** (推荐):
 ```bash
 docker-compose up --build
 ```
 
-或本地运行：
+**不使用Docker**:
 ```bash
 python main.py
 ```
 
-## 配置
+## 📁 项目结构
 
-### 环境变量 (.env)
-- `MODEL_NAME`：OpenAI模型 (默认: gpt-4)
-- `OPENAI_API_KEY`：您的OpenAI API密钥
-
-### 日志系统
-- 控制台 (INFO级别)：彩色输出，实时更新
-- 文件 (DEBUG级别)：详细诊断信息保存在 `logs/docparser_{time}.log`
-
-## 输出结构
-
-```
-docs_output/
-├── sites/              # 按域名组织的文档
-│   └── {domain}/      # 每个域名的内容
-└── combined/          # 汇总文档
-	├── index.md       # 主索引
-	└── {domain}.md    # 域名汇总
+```plaintext
+docscraper/
+├── 📂 docs_output/        # 生成的文档
+│   ├── sites/           # 按站点的内容
+│   └── combined/        # 统一知识库
+├── 📝 main.py           # 核心应用
+├── 🐳 Dockerfile        # 容器配置
+├── 📋 requirements.txt  # 依赖项
+└── ⚙️ .env             # 配置文件
 ```
 
-## Docker支持
+## 🎨 输出格式
 
-- 资源限制：2GB内存
-- 文档和日志的卷挂载
-- 启用健康检查
+DocScraper生成两种RAG优化的内容：
 
-## 许可证
+### 1. 📑 站点特定文档
+- 每页清晰的markdown
+- 原始URL结构
+- 丰富的元数据头
+- AI增强的内容
+
+### 2. 📚 统一知识库
+- 交叉引用文档
+- 全局搜索索引
+- 主题关系
+- 语义连接
+
+## ⚙️ 配置
+
+### 环境变量
+| 变量 | 用途 | 默认值 |
+|------|------|--------|
+| MODEL_NAME | OpenAI模型 | gpt-4 |
+| OPENAI_API_KEY | API认证 | 必需 |
+| LOG_LEVEL | 日志详细程度 | INFO |
+| MAX_CONCURRENT | 并行操作数 | 3 |
+
+### 🔧 资源设置
+- 🖥️ 内存限制: 2GB
+- 📊 并发任务: 3
+- 📝 日志轮转: 500MB
+- 🕒 日志保留: 10天
+
+## 📈 RAG集成
+
+### 文档处理
+- 📝 一致的markdown格式
+- 🌳 层次结构
+- 🏷️ 丰富元数据包含
+- 🔍 语义分块
+- 🔗 交叉引用
+
+### 知识组织
+- 📚 主题关系
+- 🔄 文档依赖
+- 🧩 语义连接
+
+## 🤝 贡献
+
+欢迎贡献！查看我们的[贡献指南](CONTRIBUTING.md)了解：
+- 📝 代码风格指南
+- 🔍 测试要求
+- 🚀 PR流程
+- 📦 开发环境设置
+
+## 📄 许可证
 
 MIT License - 详见 [LICENSE](LICENSE)
