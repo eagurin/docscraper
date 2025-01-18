@@ -1,126 +1,137 @@
-# DocsiteToMD
+# DocScraper
 
-> 🌍 Language: [English](README.md) | [Русский](docs/README_ru.md) | [中文](docs/README_zh.md)
+An asynchronous documentation scraper and parser that transforms web documentation into structured markdown files, optimized for RAG (Retrieval-Augmented Generation) systems and AI training datasets.
 
-A specialized tool for converting documentation websites into structured markdown files, optimized for training RAG (Retrieval-Augmented Generation) systems. It crawls documentation sites, preserves their structure, and generates AI-enhanced markdown content.
+## Features
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+- Asynchronous web crawling with concurrent processing
+- Intelligent HTML to Markdown conversion
+- RAG-optimized documentation structure
+- AI-enhanced content organization
+- Comprehensive logging system
+- Docker support with resource management
 
-## 🎯 Core Functionality
+## Key Benefits
 
-DocsiteToMD transforms documentation websites through several key stages:
+- **Clean Markdown Output**: Generates well-structured markdown files
+- **RAG-Ready Format**: Optimized for training AI models
+- **Hierarchy Preservation**: Maintains original documentation structure
+- **Rich Metadata**: Includes context and relationships
+- **Cross-References**: Preserves internal links and references
 
-1. **Documentation Site Crawling**: 
-   - Asynchronous multi-threaded crawling
-   - Smart rate limiting and robots.txt compliance
-   - Documentation-specific content extraction
+## Requirements
 
-2. **Content Processing**:
-   - HTML to Markdown conversion
-   - Documentation hierarchy preservation
-   - Metadata extraction and enrichment
+- Python 3.8+
+- OpenAI API key
+- Docker (optional)
 
-3. **RAG Optimization**:
-   - AI-powered content structuring
-   - Semantic analysis for better retrieval
-   - Context-aware organization
+## Installation
 
-## 🏗 Architecture
-
-```plaintext
-DocsiteToMD/
-├── Crawling Engine
-│   ├── Async Fetcher
-│   └── Content Extractor
-├── Processing Pipeline
-│   ├── Markdown Converter
-│   ├── Structure Analyzer
-│   └── AI Enhancer
-└── Output Generator
-    ├── Site-Specific Docs
-    └── Combined Knowledge Base
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/docscraper.git
+cd docscraper
 ```
 
-## 💾 Data Processing Flow
+2. Create and activate virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
-1. **Input Phase**
-   - Documentation site URL validation
-   - Domain categorization
-   - Rate limit configuration
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-2. **Processing Phase**
-   - Concurrent page fetching
-   - Documentation extraction
-   - AI-assisted enhancement
+4. Create .env file:
+```bash
+MODEL_NAME=gpt-4
+OPENAI_API_KEY=your_api_key_here
+```
 
-3. **Output Phase**
-   - RAG-optimized markdown generation
-   - Cross-reference preservation
-   - Index compilation
+## Usage
 
-## 🚀 Quick Start
+### Running with Python
 
 ```bash
-# Clone repository
-git clone https://github.com/eagurin/docsitetomd.git
-
-# Setup environment
-cp .env.example .env
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-
-# Run with Docker
-docker-compose up --build
-
-# Or run locally
 python main.py
 ```
 
-## ⚙️ Configuration
+### Running with Docker Compose
 
-### Environment Variables
-| Variable | Purpose | Default |
-|----------|----------|----------|
-| MODEL_NAME | OpenAI model selection | gpt-4 |
-| OPENAI_API_KEY | API authentication | Required |
-| LOG_LEVEL | Logging detail level | INFO |
-
-### Output Structure
-```plaintext
-docs_output/
-├── sites/              # Documentation site content
-│   └── {domain}/      # Per-site documentation
-└── combined/          # Unified knowledge base
-    ├── index.md       # Global index
-    └── {domain}.md    # Domain summaries
+```bash
+docker-compose up --build
 ```
 
-## 🔍 RAG Integration
+## Project Structure
 
-Key features for RAG systems:
+```
+docscraper/
+├── docs_output/          # Output directory for documentation
+│   ├── sites/           # Domain-specific documentation
+│   └── combined/        # Combined documentation files
+├── logs/                # Log files directory
+├── main.py              # Main application file
+├── requirements.txt     # Python dependencies
+├── Dockerfile          # Docker configuration
+├── docker-compose.yml  # Docker Compose configuration
+└── .env                # Environment variables
+```
 
-1. **Document Structure**
-   - Consistent markdown formatting
-   - Documentation hierarchy preservation
-   - Rich metadata inclusion
+## Output Structure
 
-2. **Content Processing**
-   - Semantic chunking
-   - Context preservation
-   - Cross-reference maintenance
+The parser generates RAG-optimized markdown in two formats:
 
-3. **Knowledge Organization**
-   - Topic relationships
-   - Documentation dependencies
-   - Semantic connections
+1. Domain-specific documentation (`docs_output/sites/{domain}/`):
+   - Clean markdown files for each page
+   - Preserved URL structure in markdown
+   - Metadata-rich content
 
-## 📚 Resources
+2. Combined documentation (`docs_output/combined/`):
+   - Domain-specific markdown compilations
+   - Master markdown index
+   - Cross-referenced documentation
 
-- [Environment Setup](.env.example)
-- [Docker Configuration](docker-compose.yml)
-- [License](LICENSE)
+## Logging
 
-## 🤝 Contributing
+The application uses loguru for comprehensive logging:
 
-Contributions welcome! See our [Contributing Guide](docs/CONTRIBUTING.md) for details.
+- Console output (INFO level):
+  - Colored formatting
+  - Real-time processing updates
+  - Important operational information
+
+- File logging (DEBUG level):
+  - Detailed debug information
+  - Full error tracebacks
+  - Diagnostic information
+  - Log rotation: 500MB per file
+  - Log retention: 10 days
+
+Log files are stored in `logs/docparser_{time}.log`
+
+## Configuration
+
+Key configuration options:
+
+- `MAX_CONCURRENT`: Maximum concurrent operations (default: 3)
+- `BROWSER_CONFIG`: Browser configuration settings
+- Docker resource limits:
+  - Memory limit: 2GB
+  - Memory reservation: 1GB
+- Log levels:
+  - Console: INFO
+  - File: DEBUG
+
+## License
+
+MIT License
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
