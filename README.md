@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-🌍 **Languages**: [English](README.md) | [Русский](docs/README_ru.md) | [中文](docs/README_zh.md)
+🌍 **Languages**: [English](README.md) | [Русский](README_ru.md) | [中文](README_zh.md)
 
 ## 🎯 What it Does
 
