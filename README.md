@@ -62,7 +62,7 @@ make run \
 	OUTPUT_DIR=custom_docs \
 	MAX_CONCURRENT=5 \
 	WAIT_TIME=5.0 \
-	MODEL=gpt-4
+	MODEL_NAME=gpt-4
 ```
 
 ### ⚙️ Command Line Parameters
