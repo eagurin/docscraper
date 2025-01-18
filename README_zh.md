@@ -60,7 +60,7 @@ make run URL=https://docs.example.com
 - URL: 要爬取的URL（必需）
 - OUTPUT_DIR: 输出目录（默认：docs_output）
 - MAX_CONCURRENT: 最大并发请求数（默认：3）
-- WAIT_TIME: 页面加载等待时间（默认：3.0）
+- WAIT_TIME: 页面加载等待时间（默认：10.0）
 - MODEL: OpenAI模型（默认：gpt-4）
 
 
