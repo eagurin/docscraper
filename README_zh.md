@@ -43,11 +43,10 @@ git clone https://github.com/eagurin/docscraper.git
 cd docscraper
 ```
 
-2. **创建环境**:
+2. **使用Poetry安装**（推荐）:
 ```bash
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
+poetry install
+poetry shell
 ```
 
 3. **配置**:
@@ -60,14 +59,32 @@ cp .env.example .env
 
 ### 🎮 使用方法
 
-**使用Docker** (推荐):
+**使用Poetry和Docker**（推荐）:
 ```bash
-docker-compose up --build
+poetry run python main.py  # 本地运行
+# 或
+docker-compose up --build  # Docker运行
 ```
 
-**不使用Docker**:
+## 🛠 开发
+
+### 设置开发环境
 ```bash
-python main.py
+poetry install --with dev
+poetry shell
+```
+
+### 代码质量
+```bash
+poetry run black .
+poetry run isort .
+poetry run mypy .
+poetry run ruff .
+```
+
+### 测试
+```bash
+poetry run pytest
 ```
 
 ## 📁 项目结构

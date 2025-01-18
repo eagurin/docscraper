@@ -43,11 +43,10 @@ git clone https://github.com/eagurin/docscraper.git
 cd docscraper
 ```
 
-2. **Create Environment**:
+2. **Install with Poetry** (recommended):
 ```bash
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
+poetry install
+poetry shell
 ```
 
 3. **Configure**:
@@ -60,14 +59,32 @@ cp .env.example .env
 
 ### 🎮 Usage
 
-**With Docker** (recommended):
+**With Poetry and Docker** (recommended):
 ```bash
-docker-compose up --build
+poetry run python main.py  # Local run
+# or
+docker-compose up --build  # Docker run
 ```
 
-**Without Docker**:
+## 🛠 Development
+
+### Setup Development Environment
 ```bash
-python main.py
+poetry install --with dev
+poetry shell
+```
+
+### Code Quality
+```bash
+poetry run black .
+poetry run isort .
+poetry run mypy .
+poetry run ruff .
+```
+
+### Testing
+```bash
+poetry run pytest
 ```
 
 ## 📁 Project Structure

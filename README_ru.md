@@ -38,22 +38,18 @@ DocScraper автоматически преобразует сайты доку
 ### 📦 Установка
 
 1. **Клонирование и настройка**:
-
 ```bash
 git clone https://github.com/eagurin/docscraper.git
 cd docscraper
 ```
 
-2. **Создание окружения**:
-
+2. **Установка с Poetry** (рекомендуется):
 ```bash
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
+poetry install
+poetry shell
 ```
 
 3. **Конфигурация**:
-
 ```bash
 cp .env.example .env
 # Отредактируйте .env:
@@ -63,16 +59,32 @@ cp .env.example .env
 
 ### 🎮 Использование
 
-**С Docker** (рекомендуется):
-
+**С Poetry и Docker** (рекомендуется):
 ```bash
-docker-compose up --build
+poetry run python main.py  # Локальный запуск
+# или
+docker-compose up --build  # Запуск в Docker
 ```
 
-**Без Docker**:
+## 🛠 Разработка
 
+### Настройка окружения разработки
 ```bash
-python main.py
+poetry install --with dev
+poetry shell
+```
+
+### Качество кода
+```bash
+poetry run black .
+poetry run isort .
+poetry run mypy .
+poetry run ruff .
+```
+
+### Тестирование
+```bash
+poetry run pytest
 ```
 
 ## 📁 Структура проекта
