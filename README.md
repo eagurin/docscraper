@@ -12,12 +12,14 @@ DocScraper automatically converts documentation websites into clean, structured 
 
 ### ✨ Key Features
 
-- 🔄 **Smart Crawling**: Asynchronous, multi-threaded website processing
-- 📝 **Intelligent Conversion**: HTML → Clean Markdown transformation
+- 🔄 **Efficient Crawling**: Asynchronous, rate-limited website processing
+- 📝 **Smart Conversion**: HTML → Clean Markdown transformation
 - 🧠 **AI Enhancement**: OpenAI-powered content structuring
 - 📊 **RAG Optimization**: Perfect for training data preparation
-- 🔍 **Metadata Rich**: Preserves context and relationships
+- 🔍 **Rich Metadata**: Preserves context and relationships
 - 🐳 **Docker-ready**: Easy deployment and scaling
+- 🔁 **Retry Mechanism**: Built-in error handling and request retries
+- 📦 **Batch Processing**: Efficient handling of large documentation sites
 
 
 ## 💫 Why DocScraper?
@@ -27,6 +29,7 @@ DocScraper automatically converts documentation websites into clean, structured 
 - 🌳 **Structure Preservation**: Maintains original hierarchy
 - 🔗 **Smart References**: Keeps internal links and context
 - 🎨 **Rich Metadata**: Enhanced with AI-generated insights
+- 🔄 **Resilient Processing**: Handles rate limits and failures gracefully
 
 ## 🚀 Quick Start
 
@@ -61,8 +64,8 @@ make run \
 	URL=https://your-docs.com \
 	OUTPUT_DIR=custom_docs \
 	MAX_CONCURRENT=5 \
-	WAIT_TIME=5.0 \
 	MODEL_NAME=gpt-4
+
 ```
 
 ### ⚙️ Command Line Parameters
@@ -72,8 +75,8 @@ make run \
 | URL | Starting URL to scrape | Required |
 | OUTPUT_DIR | Output directory | docs_output |
 | MAX_CONCURRENT | Maximum concurrent requests | 3 |
-| WAIT_TIME | Wait time for page load (seconds) | 10.0 |
 | MODEL_NAME | OpenAI model name | gpt-4 |
+
 
 ## 🛠 Development
 

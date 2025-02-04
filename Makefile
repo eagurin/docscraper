@@ -4,7 +4,6 @@ PYTHON = poetry run python
 URL ?= https://docs.browser-use.com/introduction
 OUTPUT_DIR ?= docs_output
 MAX_CONCURRENT ?= 3
-WAIT_TIME ?= 10.0
 MODEL_NAME ?= gpt-4
 
 help:
@@ -14,8 +13,7 @@ help:
 	@echo "    URL=<url>          Starting URL to scrape (required)"
 	@echo "    OUTPUT_DIR=<dir>   Output directory (default: docs_output)"
 	@echo "    MAX_CONCURRENT=<n> Maximum concurrent requests (default: 3)"
-	@echo "    WAIT_TIME=<sec>    Wait time for page load (default: 10.0)"
-	@echo "    MODEL_NAME=<name>       OpenAI model name (default: gpt-4)"
+	@echo "    MODEL_NAME=<name>  OpenAI model name (default: gpt-4)"
 	@echo "  make lint          - Run all linters"
 	@echo "  make test          - Run tests"
 	@echo "  make clean         - Clean up generated files"
@@ -28,8 +26,8 @@ run:
 		--url $(URL) \
 		--output-dir $(OUTPUT_DIR) \
 		--max-concurrent $(MAX_CONCURRENT) \
-		--wait-time $(WAIT_TIME) \
 		$(if $(MODEL_NAME),--model $(MODEL_NAME))
+
 
 lint:
 	$(PYTHON) -m black .

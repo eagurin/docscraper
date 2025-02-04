@@ -17,23 +17,35 @@ We welcome contributions to DocScraper! This document provides guidelines and be
 git clone https://github.com/your-username/docscraper.git
 cd docscraper
 
+# Install Poetry (if not already installed)
+curl -sSL https://install.python-poetry.org | python3 -
+
 # Set up development environment
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
+poetry install --with dev
+poetry shell
 ```
 
 ## Code Style
 
-- Follow PEP 8 guidelines
-- Use type hints
-- Write descriptive docstrings
-- Keep functions focused and modular
+We use several tools to maintain code quality:
+- Black for code formatting
+- isort for import sorting
+- mypy for type checking
+- ruff for linting
+
+Run all checks with:
+```bash
+poetry run black .
+poetry run isort .
+poetry run mypy .
+poetry run ruff .
+```
 
 ## Testing
 
 - Write unit tests for new features
-- Ensure all tests pass before submitting PR
+- Use pytest and pytest-asyncio for testing
+- Run tests with: `poetry run pytest`
 - Include integration tests where appropriate
 
 ## Pull Request Process
@@ -41,12 +53,12 @@ pip install -r requirements.txt
 1. Update documentation for new features
 2. Add tests for new functionality
 3. Update CHANGELOG.md if applicable
-4. Ensure CI passes all checks
+4. Ensure all code quality checks pass
 5. Request review from maintainers
 
 ## Documentation
 
-- Keep README.md updated
+- Keep README.md and translations (README_ru.md, README_zh.md) updated
 - Document new features
 - Include docstrings for public APIs
 - Update architecture diagrams if needed

@@ -8,6 +8,6 @@ services:
       - URL=https://docs.browser-use.com/introduction
       - OUTPUT_DIR=docs_output
       - MAX_CONCURRENT=2
-      - WAIT_TIME=5.0
-    command: poetry run python main.py --url ${URL} --output-dir ${OUTPUT_DIR} --max-concurrent ${MAX_CONCURRENT} --wait-time ${WAIT_TIME}
+      - MODEL_NAME=gpt-4
+    command: poetry run python main.py --url ${URL} --output-dir ${OUTPUT_DIR} --max-concurrent ${MAX_CONCURRENT} --model ${MODEL_NAME}
 
