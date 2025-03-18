@@ -22,6 +22,7 @@ wheels/
 *.egg
 
 # Virtual Environment
+.env
 venv/
 ENV/
 .venv/
@@ -37,8 +38,12 @@ dist/
 *.swp
 *.swo
 
+.mypy_cache/
+.ruff_cache/
+
 # Project specific
 docs_output/
+output/
 logs/
 .env
 

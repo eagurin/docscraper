@@ -45,3 +45,4 @@ clean:
 	find . -type d -name ".pytest_cache" -exec rm -rf {} +
 	find . -type d -name ".mypy_cache" -exec rm -rf {} +
 
+# poetry run python main.py --url "https://www.mongodb.com/docs/drivers/python-drivers/" --output-dir /Users/laptop/dev/docscraper/output --max-concurrent 25
